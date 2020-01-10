@@ -5,10 +5,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bhagyashree.wipropocproject.R;
-import com.bhagyashree.wipropocproject.model.NewsDetailModel;
+import com.bhagyashree.wipropocproject.adapter.DetailListAdapter;
+import com.bhagyashree.wipropocproject.model.DetailModel;
 
 import java.util.List;
 
@@ -18,13 +20,15 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainActivityView.View {
 
     private MainActivityPresenter mMainActivityPresenter;
-    private List<NewsDetailModel> mNewsDetailModelList;
+    private List<DetailModel> mNewsDetailModelList;
 
     @BindView(R.id.rv_list)
     RecyclerView mList;
 
     @BindView(R.id.tv_header)
     TextView mHeader;
+
+    private DetailListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView.
         ButterKnife.bind(this);
 
         mMainActivityPresenter = new MainActivityPresenter(this, this);
+        mAdapter = new DetailListAdapter(this);
+        mList.setHasFixedSize(true);
+        mList.setLayoutManager(new LinearLayoutManager(this));
+        mList.setAdapter(mAdapter);
     }
 
     @Override
@@ -54,7 +62,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView.
     }
 
     @Override
-    public void setList(List<NewsDetailModel> rows) {
+    public void setList(List<DetailModel> rows) {
         mNewsDetailModelList = rows;
+
+        mAdapter.setRowList(rows);
+        mAdapter.notifyDataSetChanged();
     }
 }

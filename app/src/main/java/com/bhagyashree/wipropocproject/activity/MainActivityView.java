@@ -1,6 +1,6 @@
 package com.bhagyashree.wipropocproject.activity;
 
-import com.bhagyashree.wipropocproject.model.NewsDetailModel;
+import com.bhagyashree.wipropocproject.model.DetailModel;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class MainActivityView {
 
         void setTitleBar(String title);
 
-        void setList(List<NewsDetailModel> rows);
+        void setList(List<DetailModel> rows);
     }
 
     public interface Action {

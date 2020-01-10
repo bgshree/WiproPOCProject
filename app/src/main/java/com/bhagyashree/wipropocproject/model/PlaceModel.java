@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class NewsModel {
+public class PlaceModel {
 
     @SerializedName("title")
     @Expose
     private String title;
     @SerializedName("rows")
     @Expose
-    private List<NewsDetailModel> rows = null;
+    private List<DetailModel> rows = null;
 
     public String getTitle() {
         return title;
@@ -22,11 +22,11 @@ public class NewsModel {
         this.title = title;
     }
 
-    public List<NewsDetailModel> getRows() {
+    public List<DetailModel> getRows() {
         return rows;
     }
 
-    public void setRows(List<NewsDetailModel> rows) {
+    public void setRows(List<DetailModel> rows) {
         this.rows = rows;
     }
 

@@ -3,4 +3,7 @@
     <string name="unable_to_load">Unable to load the data</string>
     <string name="info">Info</string>
     <string name="ok">Ok</string>
+    <string name="no_description">No Description Found</string>
+    <string name="no_title">No title</string>
+    <string name="thumbnail_missing">Thumbnail Missing</string>
 </resources>

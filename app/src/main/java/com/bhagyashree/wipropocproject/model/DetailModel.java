@@ -3,7 +3,7 @@ package com.bhagyashree.wipropocproject.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class NewsDetailModel {
+public class DetailModel {
 
     @SerializedName("title")
     @Expose
@@ -13,7 +13,7 @@ public class NewsDetailModel {
     private String description;
     @SerializedName("imageHref")
     @Expose
-    private Object imageHref;
+    private String imageHref;
 
     public String getTitle() {
         return title;
@@ -31,11 +31,11 @@ public class NewsDetailModel {
         this.description = description;
     }
 
-    public Object getImageHref() {
+    public String getImageHref() {
         return imageHref;
     }
 
-    public void setImageHref(Object imageHref) {
+    public void setImageHref(String imageHref) {
         this.imageHref = imageHref;
     }
 

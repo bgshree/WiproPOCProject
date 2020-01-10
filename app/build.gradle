@@ -1,19 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.bhagyashree.wipropocproject"
         minSdkVersion 15
-        //noinspection OldTargetApi
-        targetSdkVersion 26 // Using 26 as target SDK version because as per below message
+        targetSdkVersion 29
+        // Using 29 as target SDK version because as per below message
         // "As of the second half of 2018, Google Play requires that new apps and app updates target API level 26 or higher"
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json\""
+        buildConfigField "String", "BASE_URL", "\"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/\""
     }
     buildTypes {
         release {
@@ -29,12 +29,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     // Retrofit Library
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
@@ -43,8 +43,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     //Butter knife Library
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     //Font Library
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
@@ -56,4 +56,6 @@ dependencies {
     //Realm Library
     implementation 'io.realm:android-adapters:2.0.0'
 
+    implementation 'com.android.support:cardview-v7:29.0.0'
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
 }

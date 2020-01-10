@@ -1,6 +1,6 @@
 package com.bhagyashree.wipropocproject.retrofit;
 
-import com.bhagyashree.wipropocproject.model.NewsModel;
+import com.bhagyashree.wipropocproject.model.PlaceModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,8 +24,8 @@ public class ApiManager {
         return sApiManager;
     }
 
-    public void getListAPI(Callback<NewsModel> callback) {
-        Call<NewsModel> tokenCall = apiInterface.getNewsList();
+    public void getListAPI(Callback<PlaceModel> callback) {
+        Call<PlaceModel> tokenCall = apiInterface.getNewsList();
         tokenCall.enqueue(callback);
     }
 }
