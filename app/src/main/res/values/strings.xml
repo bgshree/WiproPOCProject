@@ -6,4 +6,5 @@
     <string name="no_description">No Description Found</string>
     <string name="no_title">No title</string>
     <string name="thumbnail_missing">Thumbnail Missing</string>
+    <string name="data_not_load">Data not loaded. \n Please swipe to reload data.</string>
 </resources>

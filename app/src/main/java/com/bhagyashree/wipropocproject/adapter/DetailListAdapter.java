@@ -45,6 +45,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         DetailModel detailModel = detailModelList.get(position);
         String description = detailModel.getDescription();
         String title = detailModel.getTitle();
@@ -62,18 +63,22 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.Vi
             holder.titleTV.setText(context.getString(R.string.no_title));
         }
 
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.default_image)
-                .error(R.drawable.default_image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .priority(Priority.HIGH);
 
-        Glide.with(context)
-                .load(imageLink)
-                .apply(options)
-                .into(holder.thumbnailIV);
+        if (!TextUtils.isEmpty(imageLink)) {
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.drawable.default_thumbnail)
+                    .onlyRetrieveFromCache(false)
+                    .skipMemoryCache(false)
+                    .error(R.drawable.default_thumbnail)
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .priority(Priority.HIGH);
+
+            Glide.with(context)
+                    .load(imageLink)
+                    .apply(options)
+                    .into(holder.thumbnailIV);
+        }
     }
 
     @Override

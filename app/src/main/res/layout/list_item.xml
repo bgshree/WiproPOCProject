@@ -1,41 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_marginTop="@dimen/margin_10dp"
+    android:layout_marginLeft="@dimen/margin_10dp"
+    android:layout_marginRight="@dimen/margin_10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_5dp">
 
         <ImageView
             android:id="@+id/iv_thumbnail"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginRight="10dp" />
+            android:layout_centerVertical="true"
+            android:background="@color/greyLight"
+            android:src="@drawable/default_thumbnail"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_8dp"
+            android:scaleType="center" />
 
         <TextView
-            android:layout_toRightOf="@id/iv_thumbnail"
             android:id="@+id/tv_title"
+            fontPath="fonts/Roboto-Light.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_thumbnail"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/text_size_18sp"
+            android:textStyle="bold"
+            tools:ignore="MissingPrefix" />
 
         <TextView
+            fontPath="fonts/Roboto-Light.ttf"
             android:id="@+id/tv_description"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/iv_thumbnail"
-            android:textSize="15sp" />
-
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_toRightOf="@id/iv_thumbnail"
+            android:textSize="@dimen/text_size_15sp"
+            tools:ignore="MissingPrefix" />
 
     </RelativeLayout>
 

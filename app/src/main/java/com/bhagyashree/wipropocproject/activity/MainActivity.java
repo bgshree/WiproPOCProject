@@ -1,32 +1,37 @@
 package com.bhagyashree.wipropocproject.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bhagyashree.wipropocproject.R;
 import com.bhagyashree.wipropocproject.adapter.DetailListAdapter;
 import com.bhagyashree.wipropocproject.model.DetailModel;
+import com.bhagyashree.wipropocproject.utils.DialogUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView.View {
+public class MainActivity extends AppCompatActivity implements MainActivityView.View, SwipeRefreshLayout.OnRefreshListener {
 
     private MainActivityPresenter mMainActivityPresenter;
     private List<DetailModel> mNewsDetailModelList;
 
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mRefreshLayout;
+
     @BindView(R.id.rv_list)
     RecyclerView mList;
 
-    @BindView(R.id.tv_header)
-    TextView mHeader;
+    @BindView(R.id.tv_data_not_load)
+    TextView mDataNotLoad;
 
     private DetailListAdapter mAdapter;
 
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView.
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
+        mRefreshLayout.setOnRefreshListener(this);
         mMainActivityPresenter = new MainActivityPresenter(this, this);
         mAdapter = new DetailListAdapter(this);
         mList.setHasFixedSize(true);
@@ -47,25 +52,40 @@ public class MainActivity extends AppCompatActivity implements MainActivityView.
     @Override
     protected void onResume() {
         super.onResume();
-
-        mMainActivityPresenter.callListAPI();
-    }
-
-    @Override
-    public void showToast(String toastMessage) {
-        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
+        mDataNotLoad.setVisibility(View.GONE);
+        DialogUtil.showProgressDialog(this, "Please wait", "Data Loading...", null);
+        mMainActivityPresenter.callListAPI(false);
     }
 
     @Override
     public void setTitleBar(String title) {
-        mHeader.setText(title);
+        setTitle(title);
     }
 
     @Override
     public void setList(List<DetailModel> rows) {
         mNewsDetailModelList = rows;
-
         mAdapter.setRowList(rows);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void stopRefreshing() {
+        mRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void unableToLoad() {
+        mDataNotLoad.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    public void onRefresh() {
+        mDataNotLoad.setVisibility(View.GONE);
+        mAdapter.setRowList(null);
+        mAdapter.notifyDataSetChanged();
+        mRefreshLayout.setRefreshing(true);
+        mMainActivityPresenter.callListAPI(true);
     }
 }

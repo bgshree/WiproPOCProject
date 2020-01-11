@@ -21,13 +21,16 @@ public class MainActivityPresenter implements MainActivityView.Action {
     }
 
     @Override
-    public void callListAPI() {
+    public void callListAPI(boolean isRefreshing) {
         ApiManager.getInstance().getListAPI(new Callback<PlaceModel>() {
             @Override
             public void onResponse(Call<PlaceModel> call, Response<PlaceModel> response) {
                 DialogUtil.progressDialogDismiss();
+                if(isRefreshing) {
+                    mView.stopRefreshing();
+                }
                 if (response.code() == 500) {
-                    mView.showToast(mContext.getString(R.string.unable_to_load));
+                    mView.unableToLoad();
                     return;
                 }
                 if (response.isSuccessful()) {
@@ -42,6 +45,7 @@ public class MainActivityPresenter implements MainActivityView.Action {
 
             @Override
             public void onFailure(Call<PlaceModel> call, Throwable t) {
+                mView.unableToLoad();
                 DialogUtil.progressDialogDismiss();
                 DialogUtil.showDialog(mContext, mContext.getString(R.string.info),
                         mContext.getString(R.string.unable_to_load), mContext.getString(R.string.ok), null);
