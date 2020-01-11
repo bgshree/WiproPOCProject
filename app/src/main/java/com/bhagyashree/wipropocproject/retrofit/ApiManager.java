@@ -1,6 +1,9 @@
 package com.bhagyashree.wipropocproject.retrofit;
 
-import android.content.Context;
+import com.bhagyashree.wipropocproject.model.PlaceModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class ApiManager {
     private static final String TAG = ApiManager.class.getSimpleName();
@@ -9,15 +12,20 @@ public class ApiManager {
 
     private ApiInterface apiInterface;
 
-    private ApiManager(Context context) {
-        apiInterface = ApiClient.getInstance(context).getClient().create(ApiInterface.class);
+    private ApiManager() {
+        apiInterface = ApiClient.getInstance().getClient().create(ApiInterface.class);
     }
 
-    public static synchronized ApiManager getInstance(Context context) {
+    public static synchronized ApiManager getInstance() {
         if (sApiManager == null) {
-            sApiManager = new ApiManager(context);
+            sApiManager = new ApiManager();
         }
 
         return sApiManager;
+    }
+
+    public void getListAPI(Callback<PlaceModel> callback) {
+        Call<PlaceModel> tokenCall = apiInterface.getNewsList();
+        tokenCall.enqueue(callback);
     }
 }

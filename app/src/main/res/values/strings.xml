@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">WiproPOCProject</string>
+    <string name="unable_to_load">Unable to load the data</string>
+    <string name="info">Info</string>
+    <string name="ok">Ok</string>
+    <string name="no_description">No Description Found</string>
+    <string name="no_title">No title</string>
+    <string name="thumbnail_missing">Thumbnail Missing</string>
+    <string name="data_not_load">Data not loaded. \n Please swipe to reload data.</string>
+    <string name="internet_unvailable">Internet not available</string>
+    <string name="please_wait">Please wait</string>
+    <string name="data_loading">Data Loading...</string>
 </resources>

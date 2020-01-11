@@ -7,11 +7,13 @@ android {
         applicationId "com.bhagyashree.wipropocproject"
         minSdkVersion 15
         targetSdkVersion 29
+        // Using 29 as target SDK version because as per below message
+        // "As of the second half of 2018, Google Play requires that new apps and app updates target API level 26 or higher"
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json\""
+        buildConfigField "String", "BASE_URL", "\"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/\""
     }
     buildTypes {
         release {
@@ -41,8 +43,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     //Butter knife Library
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     //Font Library
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
@@ -54,4 +56,11 @@ dependencies {
     //Realm Library
     implementation 'io.realm:android-adapters:2.0.0'
 
+    implementation 'com.android.support:cardview-v7:29.0.0'
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.6.8'
+    testImplementation 'org.robolectric:robolectric:3.0'
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.1'
 }
