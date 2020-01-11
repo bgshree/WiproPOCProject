@@ -82,12 +82,4 @@ public class DialogUtil {
             mProgressDialog.dismiss();
         }
     }
-
-    public static void showNumberPickerDialog(Context context, String title, String message,
-                                              String positiveButtonText, String negativeButtonText,
-                                              DialogInterface.OnClickListener positiveButtonListener,
-                                              DialogInterface.OnClickListener negativeButtonListener,
-                                              EditText editText) {
-        showDialog(context, title, message, positiveButtonText, negativeButtonText, null, positiveButtonListener, negativeButtonListener, null, editText);
-    }
 }

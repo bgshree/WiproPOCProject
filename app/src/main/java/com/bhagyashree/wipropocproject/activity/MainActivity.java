@@ -21,18 +21,15 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainActivityView.View, SwipeRefreshLayout.OnRefreshListener {
 
-    private MainActivityPresenter mMainActivityPresenter;
-    private List<DetailModel> mNewsDetailModelList;
-
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mRefreshLayout;
-
     @BindView(R.id.rv_list)
     RecyclerView mList;
-
     @BindView(R.id.tv_data_not_load)
     TextView mDataNotLoad;
 
+    private MainActivityPresenter mMainActivityPresenter;
+    private List<DetailModel> mNewsDetailModelList;
     private DetailListAdapter mAdapter;
 
     @Override
@@ -53,8 +50,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityView.
     protected void onResume() {
         super.onResume();
         mDataNotLoad.setVisibility(View.GONE);
-        DialogUtil.showProgressDialog(this, "Please wait", "Data Loading...", null);
+        DialogUtil.showProgressDialog(this, getString(R.string.please_wait), getString(R.string.data_loading), null);
         mMainActivityPresenter.callListAPI(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        DialogUtil.dialogDismiss();
     }
 
     @Override

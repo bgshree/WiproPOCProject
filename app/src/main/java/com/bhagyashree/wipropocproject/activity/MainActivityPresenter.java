@@ -3,8 +3,10 @@ package com.bhagyashree.wipropocproject.activity;
 import android.content.Context;
 
 import com.bhagyashree.wipropocproject.R;
+import com.bhagyashree.wipropocproject.constant.NetworkConstant;
 import com.bhagyashree.wipropocproject.model.PlaceModel;
 import com.bhagyashree.wipropocproject.retrofit.ApiManager;
+import com.bhagyashree.wipropocproject.utils.AppUtil;
 import com.bhagyashree.wipropocproject.utils.DialogUtil;
 
 import retrofit2.Call;
@@ -22,14 +24,19 @@ public class MainActivityPresenter implements MainActivityView.Action {
 
     @Override
     public void callListAPI(boolean isRefreshing) {
+        if (!AppUtil.isNetworkAvailable(mContext)) {
+            DialogUtil.showDialog(mContext, mContext.getString(R.string.info),
+                    mContext.getString(R.string.internet_unvailable), mContext.getString(R.string.ok), null);
+            return;
+        }
         ApiManager.getInstance().getListAPI(new Callback<PlaceModel>() {
             @Override
             public void onResponse(Call<PlaceModel> call, Response<PlaceModel> response) {
                 DialogUtil.progressDialogDismiss();
-                if(isRefreshing) {
+                if (isRefreshing) {
                     mView.stopRefreshing();
                 }
-                if (response.code() == 500) {
+                if (response.code() == NetworkConstant.INTERNAL_SERVER_ERROR) {
                     mView.unableToLoad();
                     return;
                 }

@@ -8,7 +8,5 @@ public class NetworkConstant {
 
     public static final long WRITE_TIME_OUT = 30;
 
-    private NetworkConstant() {
-    }
-
+    public static final int INTERNAL_SERVER_ERROR = 500;
 }
